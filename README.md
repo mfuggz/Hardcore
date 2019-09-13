@@ -1,0 +1,2 @@
+# Hardcore
+Advanced coding
