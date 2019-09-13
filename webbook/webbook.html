@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Water App</title>
+    
+   <!--IF ERROR -->
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+    
+    <!-- TEMPLATE BY WILL LUERS -->
+    
+<!--settings for viewing as app-->
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <!-- Here are the links to jQuery, the swipe plugin and custom scripts file -->  
+	<script src="jquery-2.0.3.js"></script>
+	<script src="jquery.touchSwipe.min.js"></script>
+	<script src="scripts.js"></script>
+	<script src="jquery.approach.js"></script>
+	<script type="text/javascript" src="jquery.simple-text-rotator.js"></script>
+    
+      <!--ICONS-->
+	<!-- For third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+	<!-- For iPhone with high-resolution Retina display: -->
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+	<!-- For first- and second-generation iPad: -->
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->	
+	<link rel="apple-touch-icon" sizes="57x57" href="img/apple-touch-icon-precomposed.png">
+	<!--STARTUP IMAGES-->	
+	<!-- startup image for web apps - iPad - landscape (748x1024) 
+	Note: iPad landscape startup image has to be exactly 748x1024 pixels (portrait, with contents rotated).-->
+	<link rel="apple-touch-startup-image" href="images/startup-ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape" />
+	<!-- startup image for web apps - iPad - portrait (768x1004) -->
+	<link rel="apple-touch-startup-image" href="images/startup-ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait" />
+	<!-- startup image for web apps (320x460) -->
+	<link rel="apple-touch-startup-image" href="images/startup-iphone.png" media="screen and (max-device-width: 320px" />
+	<link rel="stylesheet" href="styles.css" />
+	<!--for text rotator-->
+<style>
+	
+		  .rotating {
+		  display: inline-block;
+		  -webkit-transform-style: preserve-3d;
+		  -moz-transform-style: preserve-3d;
+		  -ms-transform-style: preserve-3d;
+		  -o-transform-style: preserve-3d;
+		  transform-style: preserve-3d;
+		  -webkit-transform: rotateX(0) rotateY(0) rotateZ(0);
+		  -moz-transform: rotateX(0) rotateY(0) rotateZ(0);
+		  -ms-transform: rotateX(0) rotateY(0) rotateZ(0);
+		  -o-transform: rotateX(0) rotateY(0) rotateZ(0);
+		  transform: rotateX(0) rotateY(0) rotateZ(0);
+		  -webkit-transition: 0.5s;
+		  -moz-transition: 0.5s;
+		  -ms-transition: 0.5s;
+		  -o-transition: 0.5s;
+		  transition: 0.5s;
+		  -webkit-transform-origin-x: 50%;
+		}
+
+		.rotating.flip {
+		  position: relative;
+		}
+
+		.rotating .front, .rotating .back {
+		  left: 0;
+		  top: 0;
+		  -webkit-backface-visibility: hidden;
+		  -moz-backface-visibility: hidden;
+		  -ms-backface-visibility: hidden;
+		  -o-backface-visibility: hidden;
+		  backface-visibility: hidden;
+		}
+
+		.rotating .front {
+		  position: absolute;
+		  display: inline-block;
+		  -webkit-transform: translate3d(0,0,1px);
+		  -moz-transform: translate3d(0,0,1px);
+		  -ms-transform: translate3d(0,0,1px);
+		  -o-transform: translate3d(0,0,1px);
+		  transform: translate3d(0,0,1px);
+		}
+
+		.rotating.flip .front {
+		  z-index: 1;
+		}
+
+		.rotating .back {
+		  display: block;
+		  opacity: 0;
+		}
+
+		.rotating.spin {
+		  -webkit-transform: rotate(360deg) scale(0);
+		  -moz-transform: rotate(360deg) scale(0);
+		  -ms-transform: rotate(360deg) scale(0);
+		  -o-transform: rotate(360deg) scale(0);
+		  transform: rotate(360deg) scale(0);
+		}
+
+
+
+		.rotating.flip .back {
+		  z-index: 2;
+		  display: block;
+		  opacity: 1;
+		  
+		  -webkit-transform: rotateY(180deg) translate3d(0,0,0);
+		  -moz-transform: rotateY(180deg) translate3d(0,0,0);
+		  -ms-transform: rotateY(180deg) translate3d(0,0,0);
+		  -o-transform: rotateY(180deg) translate3d(0,0,0);
+		  transform: rotateY(180deg) translate3d(0,0,0);
+		}
+
+		.rotating.flip.up .back {
+		  -webkit-transform: rotateX(180deg) translate3d(0,0,0);
+		  -moz-transform: rotateX(180deg) translate3d(0,0,0);
+		  -ms-transform: rotateX(180deg) translate3d(0,0,0);
+		  -o-transform: rotateX(180deg) translate3d(0,0,0);
+		  transform: rotateX(180deg) translate3d(0,0,0);
+		}
+
+		.rotating.flip.cube .front {
+		  -webkit-transform: translate3d(0,0,100px) scale(0.9,0.9);
+		  -moz-transform: translate3d(0,0,100px) scale(0.85,0.85);
+		  -ms-transform: translate3d(0,0,100px) scale(0.85,0.85);
+		  -o-transform: translate3d(0,0,100px) scale(0.85,0.85);
+		  transform: translate3d(0,0,100px) scale(0.85,0.85);
+		}
+
+		.rotating.flip.cube .back {
+		  -webkit-transform: rotateY(180deg) translate3d(0,0,100px) scale(0.9,0.9);
+		  -moz-transform: rotateY(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  -ms-transform: rotateY(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  -o-transform: rotateY(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  transform: rotateY(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		}
+
+		.rotating.flip.cube.up .back {
+		  -webkit-transform: rotateX(180deg) translate3d(0,0,100px) scale(0.9,0.9);
+		  -moz-transform: rotateX(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  -ms-transform: rotateX(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  -o-transform: rotateX(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		  transform: rotateX(180deg) translate3d(0,0,100px) scale(0.85,0.85);
+		}
+</style>
+<!--end text rotator--> 
+</head><!--End HEAD-->
+<body>			
+<div class="container">
+	<div id="pagecount">0
+	</div>
+	
+	<!--Initial main page when start up Ipad-->  
+	<div id="pagemain" class="page active">
+		<p>The Water Crisis: An App</p>
+	</div> 
+	
+	<!--page1-->
+	<div id="pg1" class="page hidden">	
+		<div class="title">The Water Crisis
+		</div>
+		<div class="leftbox">
+			<h2>Water</h2>
+		</div>
+		<div id="videoplayer"> 
+			<video controls="controls"> <source src="videos/tappedtrailer.mp4" type="video/mp4"> 
+			<source src="videos/tappedtrailer.webm" type="video/webm"> Your browser does not support the video element. </video> 
+		</div>
+		<div class="par">
+			Without water, life would not exist. It is a 
+			<a href="http://water.org/water-crisis/one-billion-affected/" target="_blank"title="text source 2"><i>prerequisite</i></a> 
+			for<br />
+			all human and economic development. Yet today, 780 million people-<br /> 
+			about <div class="frc">one in nine</div><br />-lack access to clean water. More than twice<br /> 
+			that many, 2.5 billion people, don't have access to a toilet.
+			There has<br /> been significant public attention paid to the issue 
+			of water scarcity,<br /> and for good reason. Although water is 
+			a renewable resource, it is<br /> also a<div class="para">finite one.
+		</div>
+		
+		
+	</div>
+
+	
+	<div class="par2">
+		Only 2.53 percent of earth's water is fresh, and<br /> some two-thirds of that 
+		is locked up in glaciers and permanent<br /> snow cover. But despite 
+		the very real danger of <div class="parb">future global water shortages</div> 
+		<br />for the vast majority of the nearly one billion people 
+		without safe<br />drinking water, today's <a class="auto-link" 
+		target="_blank" href="http://www.youtube.com/watch?v=BCHhwxvQqxg" 
+		title="waterinfo"><strong>water crisis</strong></a> 
+		is not<br />an issue of scarcity, but of access.
+		<button>Video</button>
+	</div>
+	<div class="gal">        
+		<img src="images/camel.jpg"  />
+		<img src="images/needwater.jpg"  />
+		<img src="images/waterbottle.png"  />
+	</div>
+	<div class="line1">
+			More than 3.4 million people die each year<br />
+  			from water, sanitation, and hygiene-related causes.
+			Nearly all deaths,
+	</div>		
+	<div class="line2">		
+		99 percent, occur in the developing world.
+	</div>		
+	<div class="line3">
+		780 million people <a href="http://water.org/water-crisis/water-facts/water/" target="_blank" title="page text original source">
+		<i>lack access to an improved water source</i></a>; 
+  		approximately one in nine people.
+  	</div>
+	<div class="line4">
+		Although this is a huge crisis,
+	</div>
+	<div class="line5">
+		major corporations are stealing from local water sources <i>without permission</i>
+	</div>
+	<div class="line6">
+		and <i>re-selling</i> that water in bottles claiming that it is filtered or "from the mountains".
+	</div>
+	<div class="line7">
+		For the truth: <a href="http://water.org/water-crisis/water-facts/water/" target="_blank" title="page text original source">
+		check</a> out the video...
+	</div>
+	<div class="line8">
+		While corporations are getting away with this, 
+		<br />people are still <i>dying</i> from unsanitized water.
+	</div>
+</div> 
+	<!--End pg1-->	
+	<!--PAGE2-->
+	<div id="pg2" class="page hidden">
+	<div class="pg2title">History</div>
+	<div class="pg2box">
+	</div>
+	<div id="historytext">
+		<div class="histext1">
+		Since water is absolutely essential to human life, it should not be surprising that it is an important 
+		<a href="http://witcombe.sbc.edu/water/history.html" target="_blank" title="page text source credit"><i>component of human history.</i></a>
+		</div>
+		<div class="histext2">
+		Yet it is surprising how little attention water receives in historical accounts.
+		</div>
+		<div class="histext3">
+		Humans have generally settled near convenient sources of water...
+		</div>
+		<div class="histext4">	
+		Some of the most innovative scholarship, concerns the way in which a body of water ties together 
+		what might otherwise be disparate areas  
+		</div>
+		<div class="histext5">
+		and provides the backbone for a common culture...		
+		</div>
+		<div class="histext6">
+		Water was also an important source of power in the
+		period before the Industrial Revolution. Even though steam power
+		made water power less necessary, water remained an essential component
+		in all <br />kinds of manufacturing processes.
+		</div>
+		<div class="histext7">
+		We should get some insights into present-day dilemmas concerning the use
+		of water in industrial societies...
+		</div>
+		<div class="histext8">
+		<strong>This is the purpose of this narrative app.</strong>
+		</div>	
+	</div>
+	<!--end historytext div-->
+	<div class="gal2">        
+		<img src="images/image4.png"  />
+		<img src="images/image5.jpg"  />
+		<img src="images/image6.jpg"  />
+	</div>
+</div><!-- end pg2-->
+<!--PAGE3-->
+<div id="pg3" class="page hidden">
+	<a href="http://www.alternet.org/story/146379/what%27s_the_single_biggest_misuse_of_water_in_the_us" target="_blank" title="Source of info-Robert Glennon"><h3>Misuse of Water</h3></a>
+		<div class="pg3line1">
+		The biggest misuse of water is the excessive pumping of groundwater. 
+		</div>
+		<div class="pg3line2">
+		It is most scary in <a href="http://www.thewaterchannel.tv/index.php?option=com_hwdvideoshare&task=viewvideo&Itemid=4&video_id=1394" target="_blank">
+		<strong>India and China</strong></a>, 
+		which rely on large-scale, 
+		industrialized agriculture to feed their huge populations. 
+		</div>
+		<div class="pg3line3">
+		They withdraw more groundwater than <strong><i>Mother Nature provides</i></strong> 
+		reliably each year. 
+		</div>
+		<div class="pg3line4">
+		The aquifers in both China and India, 
+		as well as in the United States, are <strong>declining</strong>. 
+		</div>
+		<div class="pg3line5">
+		What on earth is going to happen when this water to 
+		<strong><i>grow food</i></strong> is no longer available?	
+		</div>
+		<div class="pg3line6">
+		The most dangerous "use" is the agricultural, industrial, 
+		and municipal <strong>pollution</strong> that threatens human health. ------>>
+		</div>
+		<div class="pg3line7">
+		Pollution is very insidious because it often happens out 
+		of sight and out of mind. 
+		</div>
+		<div class="pg3line8">
+		The water that runs from farm fields, 
+		factories, or municipal wastewater treatment plants may 
+		enter rivers or groundwater. -->
+		</div>
+		<div class="pg3line9">
+		When drawing that water from streams 
+		or pumping it from the ground, we also get those contaminants. 	
+		</div>
+		<div class="gal3">
+			<img src="images/wastewater1.jpg">
+			<img src="images/river.jpg">
+			<img src="images/ground.jpg">
+		</div>
+		<div class="animation">
+		Want an animation here...
+		</div>
+</div> <!--end page3content-->	
+	<!--PAGE 4-->
+	<div id="pg4" class="page hidden">
+	<h3>Innovations</h3>
+
+	<div class="startpara">
+	Organizations are ridding the world of the <strong>Water Crisis</strong> with <span class="rotate"> new ideas, new innovations, chlorine dispensers, 
+	safe drinking water, reducing water use, funding water projects</span>.
+	</div>
+
+		<div class="ph1">
+		<a href="https://www.poverty-action.org/work/projects/safewater" target="_blank" title="Clean Water Chlorine Dispenser">
+			<img src="images/dispenser.jpg" alt="Kenya Dispenser">
+		</a>
+		<div class="d1">"Installing chlorine dispensers at communal water sources... provides a reminder to treat water."</div>
+		</div>
+		
+		<div class="ph2">
+		<a href="http://www.changemakers.com/discussions/entries/%E2%80%9Cwater-life-when-you-conserve-water-you-conserve-life%E2%80%9D" target="_blank" title="Safe Drinking Water-positive drilling">
+			<img src="images/accesswater.jpg" alt="Water Solution">
+		</a>
+		<div class="d2">"Bring water well drilling equipment to provide life-giving sources of water".</div>
+		</div>
+		
+		<div class="ph3">
+		<a href="http://www.unilever.com/sustainable-living/water/" target="_blank" title="Reducing Water Use">
+			<img src="images/reduceuse.jpg" alt="Unilever Reduce Water">
+		</a>
+	    <div class="d3">"commitment to halve the water associated with the consumer use of our products by 2020."</div>
+		</div>
+		
+		<div class="ph4">
+		<a href="http://thewaterproject.org/how-we-work.php" target="_blank" title="Funding Water Projects in Communities">
+			<img src="images/waterproject.jpg" alt="Boys In Community">
+		</a>
+		<div class="d4">"...relief to communities around the world who suffer...from a lack of access to clean water..."</div>
+		</div>
+		
+	</div>
+	<!--end page4content-->
+	<div id="pg5" class="page hidden">
+		<h3>How You Can Help</h3>
+
+		<div class="pg5ln1">
+		Want to get involved? Here are many resources for volunteering 
+		and getting the world clean, healthy water!
+		</div>
+		<div class="pg5ln2">
+		<a href="http://blueplanetnetwork.org/get-involved/"  target="_blank">Blueplanet.org</a>
+		provides a lot of information and
+		</div>
+		<div class="pg5ln3">
+		helps communities with access to water resources and clean water.
+		</div>
+		<div class="pg5ln4">
+		<a href="http://www.unwater.org/water-cooperation-2013/get-involved/en/"  target="_blank">Unwater.org</a>
+		excites and encourages people to get involved in World Water Day.
+		</div>
+		<div class="pg5ln5">
+		<a href="http://www.charitywater.org/getinvolved/volunteer_form.php" target="_blank">Charitywater.org</a>
+		has groups in New York and all around the world!
+		</div>
+		<div class="pg5ln6">
+		Finally, <a href="http://www.worldwaterrelief.org/please-give/" target="_blank">worldwaterrelief.org</a>
+		motivates people 'to' bring clean water to those most in need, 
+		</div>
+		<div class="pg5ln7">
+		by 'raising awareness through social and business networking 
+		</div>
+		<div class="pg5ln8">
+		tools... 'this' can expose millions of people to this critical need'.
+		</div>
+	</div>
+<!--endpage5content-->
+</div> <!--closes container-->
+
+</body>
+
+</html>
